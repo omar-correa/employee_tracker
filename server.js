@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-// const consoleTable = require("console.table");
+const consoleTable = require("console.table");
 // const promisemysql = require("promise-mysql");
 
 // Connect to database
@@ -20,7 +20,7 @@ const db = mysql.createConnection(
 //   const sql = `INSERT INTO movies (movie_name)
 //     VALUES (?)`;
 //   const params = [body.movie_name];
-  
+
 //   db.query(sql, params, (err, result) => {
 //     if (err) {
 //       res.status(400).json({ error: err.message });
@@ -35,7 +35,7 @@ const db = mysql.createConnection(
 // // Read all movies
 // app.get((req, res) => {
 //   const sql = `SELECT id, movie_name AS title FROM movies`;
-  
+
 //   db.query(sql, (err, rows) => {
 //     if (err) {
 //       res.status(500).json({ error: err.message });
@@ -52,7 +52,7 @@ const db = mysql.createConnection(
 // app.delete((req, res) => {
 //   const sql = `DELETE FROM movies WHERE id = ?`;
 //   const params = [req.params.id];
-  
+
 //   db.query(sql, params, (err, result) => {
 //     if (err) {
 //       res.statusMessage(400).json({ error: res.message });
@@ -116,19 +116,86 @@ const db = mysql.createConnection(
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-inquirer
-    .prompt({
-      name: "action",
-      type: "list",
-      message: "MAIN MENU",
-      choices: [
-        "View All Departments",
-        "View All Roles",
-        "View All Employees",
-        "Add Department",
-        "Add Role",
-        "Add Employee",
-        "Update Employee Role",
-      ]
-    })
+const menu = inquirer
+  .prompt([{
+    name: "menu",
+    type: "list",
+    message: "MAIN MENU",
+    choices: [
+      "View All Departments",
+      "View All Roles",
+      "View All Employees",
+      "Add Department",
+      "Add Role",
+      "Add Employee",
+      "Update Employee Role",
+    ]
+  }])
+
+  .then((answer) => {
+
+    // Switch case depending on user option
+    switch (answer.menu) {
+      case "View All Departments":
+        viewAllDeps();
+        break;
+
+      case "View All Roles":
+        viewAllRoles();
+        break;
+
+      case "View All Employees":
+        viewAllEmps();
+        break;
+
+      case "Add Department":
+        addDep();
+        break;
+
+      case "Add Role":
+        addRole();
+        break;
+      case "Add Employee":
+        addEmp();
+        break;
+      case "Update Employee Role":
+        updateEmpRole();
+        break;
+    }
+  });
+
+const viewAllDeps = ;  
+
+const addDep = inquirer.prompt([
+  {
+    name: "name",
+    type:"input",
+    message: "What department would you like to add?"
+  }
+]);
+
+const addRole = inquirer.prompt([
+  {
+    name: "",
+    type: "input",
+    message: "What role would you like to add?"
+  }
+]);
+
+const addEmp = inquirer.prompt([
+  {
+    name: "first",
+    type:"input",
+    message: "What is the employee's first name?"
+  },
+  {
+    name: "last",
+    type: "input",
+    message: "What is the employee's last name?"
+  },
+  {
     
+  }
+
+])
+menu()
