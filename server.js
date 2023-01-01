@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const consoleTable = require("console.table");
+// const consoleTable = require("console.table");
 // const promisemysql = require("promise-mysql");
 
 // Connect to database
@@ -10,7 +10,7 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: '',
+    password: 'root',
     database: 'company_db'
   },
   console.log(`Connected to the departments_db database.`)
@@ -116,86 +116,172 @@ const db = mysql.createConnection(
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-const menu = inquirer
-  .prompt([{
-    name: "menu",
-    type: "list",
-    message: "MAIN MENU",
-    choices: [
-      "View All Departments",
-      "View All Roles",
-      "View All Employees",
-      "Add Department",
-      "Add Role",
-      "Add Employee",
-      "Update Employee Role",
-    ]
-  }])
+const mainMenu = () => {
+  inquirer
+    .prompt([{
+      name: "menu",
+      type: "list",
+      message: "MAIN MENU",
+      choices: [
+        "View All Departments",
+        "View All Roles",
+        "View All Employees",
+        "Add Department",
+        "Add Role",
+        "Add Employee",
+        "Update Employee Role",
+      ]
+    }])
 
-  .then((answer) => {
+    .then((answer) => {
 
-    // Switch case depending on user option
-    switch (answer.menu) {
-      case "View All Departments":
-        viewAllDeps();
-        break;
+      // Switch case depending on user option
+      switch (answer.menu) {
+        case "View All Departments":
+          viewAllDeps();
+          break;
 
-      case "View All Roles":
-        viewAllRoles();
-        break;
+        case "View All Roles":
+          viewAllRoles();
+          break;
 
-      case "View All Employees":
-        viewAllEmps();
-        break;
+        case "View All Employees":
+          viewAllEmps();
+          break;
 
-      case "Add Department":
-        addDep();
-        break;
+        case "Add Department":
+          addDep();
+          break;
 
-      case "Add Role":
-        addRole();
-        break;
-      case "Add Employee":
-        addEmp();
-        break;
-      case "Update Employee Role":
-        updateEmpRole();
-        break;
-    }
-  });
+        case "Add Role":
+          addRole();
+          break;
+        case "Add Employee":
+          addEmp();
+          break;
+        case "Update Employee Role":
+          updateEmpRole();
+          break;
+      }
+    });
 
-const viewAllDeps = ;  
+}
 
-const addDep = inquirer.prompt([
-  {
-    name: "name",
-    type:"input",
-    message: "What department would you like to add?"
-  }
-]);
+// const menu = inquirer
+//   .prompt([{
+//     name: "menu",
+//     type: "list",
+//     message: "MAIN MENU",
+//     choices: [
+//       "View All Departments",
+//       "View All Roles",
+//       "View All Employees",
+//       "Add Department",
+//       "Add Role",
+//       "Add Employee",
+//       "Update Employee Role",
+//     ]
+//   }])
 
-const addRole = inquirer.prompt([
-  {
-    name: "",
-    type: "input",
-    message: "What role would you like to add?"
-  }
-]);
+//   .then((answer) => {
 
-const addEmp = inquirer.prompt([
-  {
-    name: "first",
-    type:"input",
-    message: "What is the employee's first name?"
-  },
-  {
-    name: "last",
-    type: "input",
-    message: "What is the employee's last name?"
-  },
-  {
-    
-  }
+//     // Switch case depending on user option
+//     switch (answer.menu) {
+//       case "View All Departments":
+//         viewAllDeps();
+//         break;
 
-])
-menu()
+//       case "View All Roles":
+//         viewAllRoles();
+//         break;
+
+//       case "View All Employees":
+//         viewAllEmps();
+//         break;
+
+//       case "Add Department":
+//         addDep();
+//         break;
+
+//       case "Add Role":
+//         addRole();
+//         break;
+//       case "Add Employee":
+//         addEmp();
+//         break;
+//       case "Update Employee Role":
+//         updateEmpRole();
+//         break;
+//     }
+//   });
+
+
+// // const addDep = inquirer.prompt([
+// //   {
+// //     name: "name",
+// //     type: "input",
+// //     message: "What department would you like to add?"
+// //   }
+// // ]);
+
+// // const addRole = inquirer.prompt([
+// //   {
+// //     name: "",
+// //     type: "input",
+// //     message: "What role would you like to add?"
+// //   }
+// // ]);
+
+// // const addEmp = inquirer.prompt([
+// //   {
+// //     name: "first",
+// //     type: "input",
+// //     message: "What is the employee's first name?"
+// //   },
+// //   {
+// //     name: "last",
+// //     type: "input",
+// //     message: "What is the employee's last name?"
+// //   },
+// //   {
+
+// //   }
+
+// ])
+
+const viewAllDeps = () => {
+  let sql = "SELECT * FROM department";
+
+  db.query(sql, (err, res) => {
+    console.table(res)
+    mainMenu()
+  })
+}
+
+const viewAllRoles = () => {
+  let sql = 'SELECT * FROM role';
+
+  db.query(sql, (err, res) => {
+    console.table(res)
+    mainMenu()
+  })
+}
+
+const viewAllEmps = () => {
+  let sql = 'SELECT * FROM employee'
+
+  db.query(sql, (err, res) => {
+    console.table(res)
+    mainMenu()
+  })
+}
+
+mainMenu()
+
+
+const runSQL = (sqlString) => {
+  db.query(sql, (err, res) => {
+    console.table(res)
+    mainMenu()
+  })
+}
