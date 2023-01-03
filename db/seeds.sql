@@ -1,22 +1,22 @@
-INSERT INTO department (name)
+INSERT INTO department (department_name)
 VALUES ("Marketing"),
        ("Sales"),
        ("Accounting"),
        ("Human Resources");
 
-INSERT INTO role (title, salary, dep_id)
-       ("Marketing Manager", 100000, 1),
+INSERT INTO role (title, salary, department_id)
+VALUES ("Marketing Manager", 100000, 1),
        ("Marketing Coordinator", 70000, 1),
-       ("Marketing Intern", 35000, 1);
-VALUES ("Sales Manager", 150000, 2),
+       ("Marketing Intern", 35000, 1),
+       ("Sales Manager", 150000, 2),
        ("Sales Rep", 90000, 2),
        ("Sales Intern", 40000, 2),
        ("Accounting Manager", 115000, 3),
        ("Accounting Rep", 95000, 3),
-       ("Accounting Intern" 55000, 3),
-       ("HR Manager", 80000, 3),
-       ("HR Rep", 58000, 3),
-       ("HR Intern", 38000, 3),
+       ("Accounting Intern", 55000, 3),
+       ("HR Manager", 80000, 4),
+       ("HR Rep", 58000, 4),
+       ("HR Intern", 38000, 4);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Omar", "Correa", 1, NULL),

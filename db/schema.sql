@@ -3,37 +3,33 @@ CREATE DATABASE company_db;
 
 USE company_db;
 
--- Department Name
+ ## Department Name
 CREATE TABLE department (
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  department_name VARCHAR(30) NOT NULL
 
-  PRIMARY KEY (id),
-  UNIQUE KEY (name)
-);
+  );
 
--- name, salary, and department
+## name, salary, and department
 CREATE TABLE role (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL NOT NULL,
-  dep_id INT NOT NULL,
-  
-  PRIMARY KEY (id),
-  FOREIGN KEY (dep_id) 
+  department_id INT NOT NULL,
+ 
+  FOREIGN KEY (department_id) 
     REFERENCES department(id)
 );
 
 
--- first name, last name, role, and manager
+## first name, last name, role, and manager
 CREATE TABLE employee (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INT NOT NULL,
-  manager_id INT REFERENCES employee(id),
+  manager_id INT,
 
-  PRIMARY KEY (id),
   FOREIGN KEY (role_id) 
     REFERENCES role(id)
 );
