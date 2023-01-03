@@ -97,6 +97,7 @@ const addEmp = () => {
         type: "list",
         message: "What is the employee's role?",
         choices: roleNames
+        
       },
       {
         name: "managerid",
